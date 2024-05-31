@@ -1,0 +1,139 @@
+<h2 class="text-center">{{ resultId ? "Update" : "Create" }} Result</h2>
+<div>
+  <form [formGroup]="resultForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-12 mb-3">
+        <label class="form-label" for="student-id">Student Name: </label>
+        <select class="form-select" id="student-id" formControlName="studentId">
+          @for (s of students; track s.studentId) {
+          <option [value]="s.studentId">{{ s.name }}</option>
+          }
+        </select>
+      </div>
+      <div class="col-6">
+        <label class="form-label" for="roll-number">Roll Number: </label>
+        <input
+          class="form-control"
+          id="roll-number"
+          type="text"
+          formControlName="rollNumber"
+          [ngClass]="{
+            'is-invalid': formErrors && formErrors.hasOwnProperty('rollNumber')
+          }"
+        />
+      </div>
+      <div class="col-6">
+        <label class="form-label" for="group-name">Group Name: </label>
+        <input
+          class="form-control"
+          id="group-name"
+          type="text"
+          formControlName="groupName"
+          [ngClass]="{
+            'is-invalid': formErrors && formErrors.hasOwnProperty('groupName')
+          }"
+        />
+      </div>
+      <div class="col-6">
+        <label class="form-label" for="examination">Examination: </label>
+        <input
+          class="form-control"
+          id="examination"
+          type="text"
+          formControlName="examination"
+          [ngClass]="{
+            'is-invalid': formErrors && formErrors.hasOwnProperty('examination')
+          }"
+        />
+      </div>
+      <div class="col-6">
+        <label class="form-label" for="year">Year: </label>
+        <input
+          class="form-control"
+          id="year"
+          type="text"
+          formControlName="year"
+          [ngClass]="{
+            'is-invalid': formErrors && formErrors.hasOwnProperty('year')
+          }"
+        />
+      </div>
+
+      <div formArrayName="subjects" class="mt-3">
+        <div class="d-flex justify-content-between mt-2">
+          <div>
+            <label class="form-label fs-4">Subjects</label>
+            @if(formErrors && formErrors.hasOwnProperty('subjects')) {
+            <span class="text-danger ms-3">{{ formErrors.subjects }}</span>
+            }
+          </div>
+          <button class="btn btn-primary" type="button" (click)="addSubject()">
+            + Add another subject
+          </button>
+        </div>
+        <div
+          class="mt-2"
+          *ngFor="let subject of subjects; let i = index"
+          [formGroupName]="i"
+        >
+          <div class="row">
+            <div class="col-2">
+              <label class="form-label" for="code{{ i }}">Code:</label>
+              <input
+                class="form-control"
+                id="code{{ i }}"
+                type="text"
+                formControlName="code"
+                [ngClass]="{
+                  'is-invalid':
+                    formErrors && formErrors.hasOwnProperty('code' + i)
+                }"
+              />
+            </div>
+            <div class="col-5">
+              <label class="form-label" for="name{{ i }}">Name:</label>
+              <input
+                class="form-control"
+                id="name{{ i }}"
+                type="text"
+                formControlName="name"
+                [ngClass]="{
+                  'is-invalid':
+                    formErrors && formErrors.hasOwnProperty('name' + i)
+                }"
+              />
+            </div>
+            <div class="col-4">
+              <label class="form-label" for="gpa{{ i }}">GPA:</label>
+              <input
+                class="form-control"
+                id="gpa{{ i }}"
+                type="text"
+                formControlName="gpa"
+                [ngClass]="{
+                  'is-invalid':
+                    formErrors && formErrors.hasOwnProperty('gpa' + i)
+                }"
+              />
+            </div>
+            <div class="col-1 d-flex align-items-end justify-content-end">
+              <button
+                class="btn btn-danger"
+                type="button"
+                (click)="removeSubject(i)"
+              >
+                X
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-centerf">
+      <button class="btn btn-success my-3 w-25" type="submit">Save</button>
+      @if(formErrors && formErrors.hasOwnProperty('duplicate')) {
+      <span class="text-danger ms-3">{{ formErrors.duplicate }}</span>
+      }
+    </div>
+  </form>
+</div>

@@ -1,0 +1,147 @@
+<div class="d-flex justify-content-center">
+  <div class="container-middle">
+    <header class="py-3 mb-4 border-bottom">
+      <span class="fs-4">Result Publishing App</span>
+    </header>
+
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <form #form="ngForm" (ngSubmit)="searchMarksheet()">
+          <div class="row">
+            <div class="col-4 mb-2">
+              <label for="examination" class="col-form-label"
+                >Examination</label
+              >
+            </div>
+            <div class="col-8">
+              <select
+                class="form-select"
+                name="examination"
+                [(ngModel)]="examination"
+              >
+                <option value="SSC">SSC</option>
+                <option value="HSC">HSC</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4 mb-2">
+              <label for="year" class="col-form-label">Year</label>
+            </div>
+            <div class="col-8">
+              <select class="form-select" name="year" [(ngModel)]="year">
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4 mb-2">
+              <label for="rollNumber" class="col-form-label">Roll Number</label>
+            </div>
+            <div class="col-8">
+              <input
+                type="text"
+                class="form-control"
+                name="rollNumber"
+                [(ngModel)]="rollNumber"
+                required
+                #rollNumberField="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    rollNumberField.invalid &&
+                    (rollNumberField.dirty || rollNumberField.touched)
+                }"
+              />
+            </div>
+          </div>
+          <div class="d-flex justify-content-end">
+            <button type="button" (click)="reset()" class="btn btn-warning">
+              Reset
+            </button>
+            <button
+              type="submit"
+              class="btn btn-success ms-2"
+              [disabled]="form.invalid"
+            >
+              Search
+            </button>
+          </div>
+        </form>
+        @if(errorDetail !== '') {
+        <p class="text-center text-danger mt-2">{{ errorDetail }}</p>
+        }
+      </div>
+      <div class="col-2"></div>
+    </div>
+
+    @if(marksheet !== null) {
+    <div>
+      <header class="py-2 mt-4 border-bottom text-center">
+        <span class="fs-4"
+          >{{ marksheet.examination }} Result {{ marksheet.year }}</span
+        >
+      </header>
+      <table class="table table-bordered">
+        <tr>
+          <td>Roll No</td>
+          <td>: {{ marksheet.rollNumber }}</td>
+          <td>Name</td>
+          <td>: {{ marksheet.name }}</td>
+        </tr>
+        <tr>
+          <td>Group</td>
+          <td>: {{ marksheet.groupName }}</td>
+          <td>Father's Name</td>
+          <td>: {{ marksheet.fatherName }}</td>
+        </tr>
+        <tr>
+          <td>GPA</td>
+          <td class="fw-bold">: {{ marksheet.gpa | number : "1.2-2" }}</td>
+          <td>Mother's Name</td>
+          <td>: {{ marksheet.motherName }}</td>
+        </tr>
+        <tr>
+          <td>Grade</td>
+          <td class="fw-bold">: {{ marksheet.grade }}</td>
+          <td>Date of Birth</td>
+          <td>: {{ marksheet.datOfBirth }}</td>
+        </tr>
+        <tr>
+          <td>Result</td>
+          <td class="fw-bold" colspan="3">{{ marksheet.result }}</td>
+        </tr>
+      </table>
+      <header class="py-2 mt-2 border-bottom text-center">
+        <span class="fs-5">Marksheet</span>
+      </header>
+      <table class="table border table-striped table-sm">
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Subject</th>
+            <th>GPA</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of marksheet.subjects; track $index) {
+          <tr>
+            <td>{{ item.code }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.gpa | number : "1.2-2" }}</td>
+            <td>{{ item.grade }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    }
+
+    <footer class="py-3 mt-5 mb-3 border-top border-warning">
+      <span class="">©2024, All rights reserved.</span>
+    </footer>
+  </div>
+</div>

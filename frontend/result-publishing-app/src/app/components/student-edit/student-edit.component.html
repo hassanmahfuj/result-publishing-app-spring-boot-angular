@@ -1,0 +1,85 @@
+<h2>{{ this.student.studentId ? "Update" : "Create" }} Student</h2>
+<form (ngSubmit)="onSaveWithPhoto()">
+  <div class="row">
+    <div class="col-8">
+      <div class="mb-3">
+        <label for="name" class="form-label">Student Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          placeholder="Student Name"
+          name="name"
+          [(ngModel)]="student.name"
+          [ngClass]="{
+            'is-invalid': formErrors && formErrors.hasOwnProperty('name')
+          }"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="fatherName" class="form-label">Father Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="fatherName"
+          placeholder="Father Name"
+          name="fatherName"
+          [(ngModel)]="student.fatherName"
+          [ngClass]="{
+            'is-invalid': formErrors && formErrors.hasOwnProperty('fatherName')
+          }"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="motherName" class="form-label">Mother Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="motherName"
+          placeholder="Mother Name"
+          name="motherName"
+          [(ngModel)]="student.motherName"
+          [ngClass]="{
+            'is-invalid': formErrors && formErrors.hasOwnProperty('motherName')
+          }"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="dateOfBirth" class="form-label">Date of Birth</label>
+        <input
+          type="date"
+          class="form-control"
+          id="dateOfBirth"
+          placeholder="Student Name"
+          name="dateOfBirth"
+          [(ngModel)]="student.dateOfBirth"
+          [ngClass]="{
+            'is-invalid': formErrors && formErrors.hasOwnProperty('dateOfBirth')
+          }"
+        />
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="d-flex flex-column align-items-center">
+        <label for="image" class="form-label">Photo</label>
+        <img
+          id="image"
+          class="rounded img-medium"
+          [src]="imageSrc || 'https://placehold.co/600x600?text=Image'"
+        />
+        <div class="mb-3">
+          <input
+            class="form-control mt-3"
+            type="file"
+            accept="image/*"
+            (change)="onImageSelected($event)"
+            [ngClass]="{
+              'is-invalid': formErrors && formErrors.hasOwnProperty('image')
+            }"
+          />
+          <button type="submit" class="btn btn-success w-100 mt-3">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

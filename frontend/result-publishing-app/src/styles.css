@@ -1,0 +1,26 @@
+.nav-link:hover {
+  background-color: #e9ecef;
+}
+
+.img-medium {
+  width: 180px;
+  height: 200px;
+  background-position: center;
+  background-size: cover;
+}
+
+.img-small {
+  width: 90px;
+  height: 100px;
+  background-position: center;
+  background-size: cover;
+}
+
+.fit-column {
+  white-space: nowrap;
+  width: 1%;
+}
+
+.container-middle {
+  min-width: 50%;
+}

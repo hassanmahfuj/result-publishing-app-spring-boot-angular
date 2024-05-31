@@ -1,0 +1,33 @@
+<div class="container">
+  <header
+    class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom"
+  >
+    <a
+      routerLink="./"
+      class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
+    >
+      <span class="fs-4">Result Publishing System</span>
+    </a>
+  </header>
+
+  <div class="row">
+    <nav class="col-md-4 col-lg-3 d-md-block">
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="mt-1">
+          <a routerLink="./student" routerLinkActive="active" class="nav-link"
+            >Students</a
+          >
+        </li>
+        <li class="mt-1">
+          <a routerLink="./result" routerLinkActive="active" class="nav-link"
+            >Results</a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <main class="col-md-8 col-lg-9 py-4 py-md-0">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
